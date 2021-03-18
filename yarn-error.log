@@ -1,0 +1,62 @@
+Arguments: 
+  /home/w/.nvm/versions/node/v12.20.0/bin/node /home/w/.nvm/versions/node/v12.20.0/bin/yarn
+
+PATH: 
+  /home/w/.deno/bin:/home/w/.nvm/versions/node/v12.20.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Android/platform-tools:/mnt/c/Users/pc/scoop/shims:/mnt/c/Users/pc/AppData/Local/Microsoft/WindowsApps:/usr/local/go/bin:/home/w/go/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.20.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  SyntaxError: /home/w/code_ch/backend/package.json: Unexpected token } in JSON at position 212
+      at JSON.parse (<anonymous>)
+      at /home/w/.nvm/versions/node/v12.20.0/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/home/w/.nvm/versions/node/v12.20.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /home/w/.nvm/versions/node/v12.20.0/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "wtf-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+      "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    },
+    "dependencies": {
+      "cors": "^2.8.5",
+      "debug": "^4.3.1",
+      "express": "^4.17.1",
+      "express-async-errors": "^3.1.1"
+    },
+    "devDependencies": {
+      "@types/cors": "^2.8.8",
+      "@types/debug": "^4.1.5",
+      "@types/express": "^4.17.9",
+      "@typescript-eslint/eslint-plugin": "^4.8.2",
+      "@typescript-eslint/parser": "^4.8.2",
+      "eslint": "^7.14.0",
+      "eslint-config-prettier": "^6.15.0",
+      "eslint-config-standard": "^16.0.2",
+      "eslint-plugin-import": "^2.22.1",
+      "eslint-plugin-node": "^11.1.0",
+      "eslint-plugin-prettier": "^3.1.4",
+      "eslint-plugin-promise": "^4.2.1",
+      "prettier": "^2.2.0",
+      "ts-node-dev": "^1.0.0",
+      "typescript": "^4.0.5"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
