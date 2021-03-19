@@ -3,21 +3,23 @@ import { Request, Response } from 'express';
 import {
   countAcronyms,
   createAcronym,
+  editAcronym,
   getAcronym,
   getRandomAcronyms,
   searchAcronyms,
 } from '../useCases/acronym';
 
 import {
-  ICreateRequest,
-  IFindRequest,
-  IRandomRequest,
-  ISearchRequest,
+  ICreateBodyRequest,
+  IEditBodyRequest,
+  IEditParams,
+  IRandomParams,
+  ISearchQuery,
 } from './@types';
 
 export class AcronymController {
   async create(
-    request: Request<any, any, ICreateRequest>,
+    request: Request<any, any, ICreateBodyRequest>,
     response: Response
   ): Promise<Response> {
     try {
@@ -40,7 +42,7 @@ export class AcronymController {
   }
 
   async search(
-    request: Request<any, any, any, ISearchRequest>,
+    request: Request<any, any, any, ISearchQuery>,
     response: Response
   ): Promise<Response> {
     try {
@@ -89,20 +91,42 @@ export class AcronymController {
   }
 
   async random(
-    request: Request<IRandomRequest>,
+    request: Request<IRandomParams>,
     response: Response
   ): Promise<Response> {
     try {
       const { count } = request.params;
       const validCount = count ? Number(count) : 1;
-
       const acronyms = await getRandomAcronyms({ count: validCount });
+
       return response.status(200).json(acronyms);
     } catch (error) {
       console.log(error);
       return response
         .status(400)
         .json({ error, message: 'error while getting acronyms.' });
+    }
+  }
+
+  async edit(
+    request: Request<IEditParams, any, IEditBodyRequest>,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const { id } = request.params;
+      const { text, definition } = request.body;
+
+      await editAcronym({
+        id: Number(id),
+        definition,
+        text,
+      });
+      return response.status(204).send();
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(400)
+        .json({ error, message: 'error while editing acronym.' });
     }
   }
 }

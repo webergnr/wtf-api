@@ -1,18 +1,27 @@
-export interface ISearchRequest {
+export interface ISearchQuery {
   limit: string;
   from: string;
   search: string;
 }
 
-export interface ICreateRequest {
+export interface ICreateBodyRequest {
   text: string;
   definition: string;
 }
 
-export interface IFindRequest {
+export interface IFindParams {
   text: string;
 }
 
-export interface IRandomRequest {
+export interface IRandomParams {
   count: string;
+}
+
+export interface IEditParams {
+  id: string;
+}
+
+export interface IEditBodyRequest {
+  text: string;
+  definition: string;
 }

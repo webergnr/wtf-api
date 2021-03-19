@@ -9,7 +9,7 @@ generator client {
 
 model Acronym {
   id         Int    @id @default(autoincrement())
-  text       String @unique
+  text       String
   definition String
 
   @@map("acronym")

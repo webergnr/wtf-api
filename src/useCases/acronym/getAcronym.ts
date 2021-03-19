@@ -5,8 +5,8 @@ interface IFindAcronym {
   text: string;
 }
 
-export default async ({ text }: IFindAcronym): Promise<Acronym | null> => {
-  return await prisma.acronym.findUnique({
+export default async ({ text }: IFindAcronym): Promise<Acronym[]> => {
+  return await prisma.acronym.findMany({
     where: {
       text,
     },
