@@ -9,8 +9,9 @@ const generateRandomArray = async (totalNumbers: number) => {
   const countEveryAcronym = await prisma.acronym.count();
   const list: number[] = [];
 
-  while (list.length !== totalNumbers) {
+  while (list.length < Math.min(totalNumbers, countEveryAcronym)) {
     const randomNumber = Math.ceil(Math.random() * countEveryAcronym);
+    console.log('number generated: ', randomNumber);
     if (list.indexOf(randomNumber) === -1) {
       list.push(randomNumber);
     }

@@ -1,4 +1,4 @@
-export interface ISearchQuery {
+export interface ISearchRequest {
   limit: string;
   from: string;
   search: string;
@@ -11,4 +11,8 @@ export interface ICreateRequest {
 
 export interface IFindRequest {
   text: string;
+}
+
+export interface IRandomRequest {
+  count: string;
 }

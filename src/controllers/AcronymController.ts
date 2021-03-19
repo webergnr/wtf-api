@@ -1,11 +1,19 @@
 import { Request, Response } from 'express';
+
 import {
   countAcronyms,
   createAcronym,
   getAcronym,
+  getRandomAcronyms,
   searchAcronyms,
 } from '../useCases/acronym';
-import { ICreateRequest, IFindRequest, ISearchQuery } from './@types';
+
+import {
+  ICreateRequest,
+  IFindRequest,
+  IRandomRequest,
+  ISearchRequest,
+} from './@types';
 
 export class AcronymController {
   async create(
@@ -15,7 +23,6 @@ export class AcronymController {
     try {
       const { text, definition } = request.body;
       if (!text || !definition) {
-        console.log(request.body);
         return response.status(400).json({
           error: 'Please, provide the text and the definition of the acronym.',
         });
@@ -33,7 +40,7 @@ export class AcronymController {
   }
 
   async search(
-    request: Request<any, any, any, ISearchQuery>,
+    request: Request<any, any, any, ISearchRequest>,
     response: Response
   ): Promise<Response> {
     try {
@@ -77,7 +84,25 @@ export class AcronymController {
       console.log(error);
       return response
         .status(400)
-        .json({ error, message: 'error while getting new acronym.' });
+        .json({ error, message: 'error while getting acronym.' });
+    }
+  }
+
+  async random(
+    request: Request<IRandomRequest>,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const { count } = request.params;
+      const validCount = count ? Number(count) : 1;
+
+      const acronyms = await getRandomAcronyms({ count: validCount });
+      return response.status(200).json(acronyms);
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(400)
+        .json({ error, message: 'error while getting acronyms.' });
     }
   }
 }
