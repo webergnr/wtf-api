@@ -2,13 +2,13 @@ import { Acronym } from '@prisma/client';
 import { prisma } from '../../database/prisma';
 
 interface IFindAcronym {
-  text: string;
+  id: number;
 }
 
-export default async ({ text }: IFindAcronym): Promise<Acronym[]> => {
-  return await prisma.acronym.findMany({
+export default async ({ id }: IFindAcronym): Promise<Acronym | null> => {
+  return await prisma.acronym.findUnique({
     where: {
-      text,
+      id,
     },
   });
 };

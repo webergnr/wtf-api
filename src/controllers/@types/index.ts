@@ -10,7 +10,7 @@ export interface ICreateBodyRequest {
 }
 
 export interface IFindParams {
-  text: string;
+  id: string;
 }
 
 export interface IRandomParams {
@@ -22,6 +22,11 @@ export interface IEditParams {
 }
 
 export interface IEditBodyRequest {
+  text: string;
+  definition: string;
+}
+
+export interface IRemoveParams {
   text: string;
   definition: string;
 }

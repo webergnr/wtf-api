@@ -4,6 +4,7 @@ import getAcronym from './getAcronym';
 import countAcronyms from './countAcronyms';
 import getRandomAcronyms from './getRandomAcronyms';
 import editAcronym from './editAcronym';
+import removeAcronym from './removeAcronym';
 
 export {
   createAcronym,
@@ -12,4 +13,5 @@ export {
   countAcronyms,
   getRandomAcronyms,
   editAcronym,
+  removeAcronym,
 };

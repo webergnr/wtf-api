@@ -7,13 +7,16 @@ import {
   getAcronym,
   getRandomAcronyms,
   searchAcronyms,
+  removeAcronym,
 } from '../useCases/acronym';
 
 import {
   ICreateBodyRequest,
   IEditBodyRequest,
   IEditParams,
+  IFindParams,
   IRandomParams,
+  IRemoveParams,
   ISearchQuery,
 } from './@types';
 
@@ -72,12 +75,12 @@ export class AcronymController {
   }
 
   async find(
-    request: Request<IFindRequest>,
+    request: Request<IFindParams>,
     response: Response
   ): Promise<Response> {
     try {
-      const { text } = request.params;
-      const acronym = await getAcronym({ text });
+      const { id } = request.params;
+      const acronym = await getAcronym({ id: Number(id) });
 
       return acronym
         ? response.status(200).json(acronym)
@@ -127,6 +130,25 @@ export class AcronymController {
       return response
         .status(400)
         .json({ error, message: 'error while editing acronym.' });
+    }
+  }
+
+  async remove(
+    request: Request<IRemoveParams>,
+    response: Response
+  ): Promise<Response> {
+    try {
+      const { id } = request.params;
+
+      await removeAcronym({
+        id: Number(id),
+      });
+      return response.status(204).send();
+    } catch (error) {
+      console.log(error);
+      return response
+        .status(400)
+        .json({ error, message: 'error while deleting acronym.' });
     }
   }
 }
