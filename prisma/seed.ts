@@ -27,7 +27,7 @@ async function main() {
       })
   );
 
-  console.log(promisesInsert.length);
+  console.log('Inserting records: ', promisesInsert.length);
 
   await Promise.all(promisesInsert);
 }

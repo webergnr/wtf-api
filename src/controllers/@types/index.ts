@@ -27,6 +27,5 @@ export interface IEditBodyRequest {
 }
 
 export interface IRemoveParams {
-  text: string;
-  definition: string;
+  id: string;
 }
