@@ -7,6 +7,8 @@ afterAll(async done => {
   done();
 });
 
+let testingId = 0;
+
 describe('Tests the acronym controller', () => {
   test('It should create a new acronym', done => {
     request(app)
@@ -28,13 +30,14 @@ describe('Tests the acronym controller', () => {
         expect(response.status).toBe(200);
         expect(response.headers).toHaveProperty('api-total-count');
         expect(response.headers).toHaveProperty('api-remaining');
+        testingId = response.body[0].id;
         done();
       });
   });
 
   test('It should find an acronym', done => {
     request(app)
-      .get('/acronym/1')
+      .get(`/acronym/${testingId}`)
       .then((response: Response) => {
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('text');
@@ -54,7 +57,7 @@ describe('Tests the acronym controller', () => {
 
   test('It should update one acronym', done => {
     request(app)
-      .put('/acronym/1')
+      .put(`/acronym/${testingId}`)
       .set({
         Authorization: 'xyz',
       })
@@ -70,7 +73,7 @@ describe('Tests the acronym controller', () => {
 
   test('It should delete one acronym', done => {
     request(app)
-      .delete('/acronym/1')
+      .delete(`/acronym/${testingId}`)
       .set({
         Authorization: 'xyz',
       })
@@ -82,7 +85,7 @@ describe('Tests the acronym controller', () => {
 
   test('It should return 401 status to unauthorized tokens when deleting.', done => {
     request(app)
-      .delete('/acronym/1')
+      .delete(`/acronym/${testingId}`)
       .then((response: Response) => {
         expect(response.status).toBe(401);
         done();
@@ -91,7 +94,7 @@ describe('Tests the acronym controller', () => {
 
   test('It should return 401 status to unauthorized tokens when updating.', done => {
     request(app)
-      .put('/acronym/1')
+      .put(`/acronym/${testingId}`)
       .send({
         text: '123',
         definition: '333',
